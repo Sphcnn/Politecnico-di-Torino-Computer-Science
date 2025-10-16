@@ -137,7 +137,7 @@ number = input("Enter your phone number:")
 print(f'({number[:3]}) {number[3:6]}-{number[6:]}')
 '''
 
-
+'''
 name = input("What is your name ? ")
 surname = input("What is your surname ? ")
 person = input("Who do you want to send message ? ")
@@ -165,10 +165,10 @@ else :
 
     else:
         print("Mail sending has been canceled ....... ")
+'''
 
 
 
-''' 10
 NUM1 = 15
 NUM2 = 75
 
@@ -180,9 +180,4 @@ Distance = abs(NUM1-NUM2)
 Max=max(NUM1,NUM2)
 Min=min(NUM1,NUM2)
 
-message = "                    "#20 spaces
-message[0:len("Sum")] = Sum
-message[-len(str(Sum)):] = str(Sum)
 
-print(message)
-'''
