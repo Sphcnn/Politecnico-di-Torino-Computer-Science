@@ -180,4 +180,11 @@ Distance = abs(NUM1-NUM2)
 Max=max(NUM1,NUM2)
 Min=min(NUM1,NUM2)
 
-
+print(f'Sum = {Sum:>5d}') 
+print(f'Difference = {Difference:>5d}') 
+print(f'Product = {Product:>5d}') 
+print(f'Avarage = {Avarage:>5.2f}') 
+print(f'Distance = {Distance:>5d}') 
+print(f'Maximum = {Max:>5d}')
+print(f'Minimum = {Min:>5d}') 
+ 
