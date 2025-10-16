@@ -186,4 +186,3 @@ message[-len(str(Sum)):] = str(Sum)
 
 print(message)
 '''
-print("Hello World")
