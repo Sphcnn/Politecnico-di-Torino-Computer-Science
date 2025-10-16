@@ -137,7 +137,7 @@ number = input("Enter your phone number:")
 print(f'({number[:3]}) {number[3:6]}-{number[6:]}')
 '''
 
-''' 9 
+
 name = input("What is your name ? ")
 surname = input("What is your surname ? ")
 person = input("Who do you want to send message ? ")
@@ -165,7 +165,7 @@ else :
 
     else:
         print("Mail sending has been canceled ....... ")
-'''
+
 
 
 ''' 10
