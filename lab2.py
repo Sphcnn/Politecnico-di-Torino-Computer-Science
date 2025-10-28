@@ -207,6 +207,10 @@ for code in emoji:
     print(temp,code,code[2:])
     print(chr(temp))   
 '''
+
+
+
+'''
 queue = []
 numbers = []
 
@@ -237,3 +241,4 @@ print("\nStudents in ascending order (by numeric part):")
 for tag in queue:
     print(tag)
 
+'''
