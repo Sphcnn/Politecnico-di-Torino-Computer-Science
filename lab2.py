@@ -168,7 +168,7 @@ else :
 '''
 
 
-
+'''
 NUM1 = 15
 NUM2 = 75
 
@@ -180,11 +180,60 @@ Distance = abs(NUM1-NUM2)
 Max=max(NUM1,NUM2)
 Min=min(NUM1,NUM2)
 
-print(f'Sum = {Sum:>5d}') 
-print(f'Difference = {Difference:>5d}') 
-print(f'Product = {Product:>5d}') 
-print(f'Avarage = {Avarage:>5.2f}') 
-print(f'Distance = {Distance:>5d}') 
-print(f'Maximum = {Max:>5d}')
-print(f'Minimum = {Min:>5d}') 
- 
+print(f'{"Sum":<10} = {Sum:>10d}') 
+print(f'{"Difference":<10} = {Difference:>10d}')
+print(f'{"Product":<10} = {Product:>10d}')
+print(f'{Avarage:<10} = {Avarage:>10.2f}') 
+print(f'{"Distance":<10} = {Distance:>10d}')
+print(f'{"Max":<10} = {Max:>10d}')
+print(f'{"Min":<10} = {Min:>10d}')
+'''
+
+'''
+emoji=[0,1,2]
+
+for i in range(3):
+    fav=input("Enter the unicode of your 3 favourite emoji:")
+    emoji[i]=fav
+    print(i)
+    i+=1
+for i in range(3):
+    print(emoji[i])
+
+
+for code in emoji:
+    
+    temp = int("0x" + code[2:], 16)#int fonksiyonunda ,den sonra 2 8 10 16 şeklinde hangi tabanda sayı yazacağımı seçebiliyorum
+    print(temp,code,code[2:])
+    print(chr(temp))   
+'''
+queue = []
+numbers = []
+
+people = int(input("How many people are you? "))
+
+
+for i in range(people):
+    tag = input(f"Enter student tag #{i+1} (e.g. A123): ")
+    queue.append(tag)
+
+
+for i in range(len(queue)):
+    num_str = ""
+    for ch in queue[i]:
+        if ch >= '0' and ch <= '9':   
+            num_str += ch
+    numbers.append(int(num_str))
+
+
+for i in range(people - 1):
+    for j in range(i + 1, people):
+        if numbers[i] > numbers[j]:
+            
+            numbers[i], numbers[j] = numbers[j], numbers[i]
+            queue[i], queue[j] = queue[j], queue[i]
+
+print("\nStudents in ascending order (by numeric part):")
+for tag in queue:
+    print(tag)
+
