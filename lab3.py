@@ -211,6 +211,7 @@ else:
         print(f"Your tax fee is : {(annualIncome*0.25) + 8800 }")
 '''
 
+''' 9
 print("Available metric units: ml, l, g, kg, mm, cm, m, km")
 print("Available imperial units: fl, oz, gal, lb, in, ft, mi")
 
@@ -310,4 +311,73 @@ else:
 
 if not result ==  None:
     print(f"\n{value} {start_unit} = {result:.4f} {target_unit}")
+'''
+''' 10
+moneySpent = float(input("How much did you spend ? "))
+voucher = 0.0
+
+if moneySpent < 10:
+    print(f"You have spent {moneySpent} so any vouncher have been won")
+elif moneySpent >= 10 and moneySpent < 60:
+    print(f"You have spent {moneySpent} so you won {moneySpent*0.08} voucher")
+elif moneySpent >= 60 and moneySpent < 150:
+    print(f"You have spent {moneySpent} so you won {moneySpent*0.1} voucher")
+elif moneySpent >= 150 and moneySpent < 210:
+    print(f"You have spent {moneySpent} so you won {moneySpent*0.12} voucher")
+elif moneySpent >= 210:
+    print(f"You have spent {moneySpent} so you won {moneySpent*0.14} voucher")
+'''
+''' 11
+wavelength = float(input("Enter wavelength : "))
+#Scientific notation yani 1e-7 falan tarzı gösterimleri python otomatik olarak decimal exponential olarak algılayıp araya girebiliyormuş.
+
+
+if wavelength > 10**-1: 
+    print("Type: Radio waves (λ > 10⁻¹ m)")
+
+elif 10**-3 < wavelength <= 10**-1:  
+    print("Type: Microwaves (10⁻³ < λ ≤ 10⁻¹ m)")
+
+elif 7 * 10**-7 < wavelength <= 10**-3:  
+    print("Type: Infrared (7×10⁻⁷ < λ ≤ 10⁻³ m)")
+
+elif 4 * 10**-7 <= wavelength <= 7 * 10**-7:  
+    print("Type: Visible light (4×10⁻⁷ ≤ λ ≤ 7×10⁻⁷ m)")
+
+elif 10**-8 <= wavelength < 4 * 10**-7:  
+    print("Type: Ultraviolet (10⁻⁸ ≤ λ < 4×10⁻⁷ m)")
+
+elif 10**-11 <= wavelength < 10**-8:  
+    print("Type: X-rays (10⁻¹¹ ≤ λ < 10⁻⁸ m)")
+
+else:  
+    print("Type: Gamma rays (λ < 10⁻¹¹ m)")
+'''
+
+import math
+
+# --- Halley's constants ---
+G = 6.67 * (10 ** -11)      
+M = 2.2 * (10 ** 14)        
+R = 4.7 * 1000              
+
+
+escapeVelocityHalley = math.sqrt((2 * G * M) / R) * 3.6
+
+
+g = float(input("Enter the gravitational constant (G): "))
+m = float(input("Enter the mass (kg): "))
+diameter = float(input("Enter the diameter (m): "))
+r = diameter / 2
+
+
+escapeVelocity = math.sqrt((2 * g * m) / r) * 3.6
+
+
+if escapeVelocity >= 11:
+    print(f"🚀 Watch out! You are escaping from Halley's gravity! Your speed: {escapeVelocity:.2f} km/h")
+else:
+    print(f"🪐 You are still on Halley's surface. Your speed: {escapeVelocity:.2f} km/h")
+
+print(f"Escape velocity on Halley: {escapeVelocityHalley:.2f} km/h (approx)")
 
