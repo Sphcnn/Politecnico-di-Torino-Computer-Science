@@ -101,6 +101,7 @@ for i in range(period):
         print(f'The population of preys : {populationPrey : .2f} and predators {populationPredators : .2f} in {i+1}')
     i += 1
 '''
+''' 7
 SPEAKER_RESISTANCE = 8
 VOLTAGE_SOURCE = 40
 AMPLIFIER_RESISTANCE = 20
@@ -113,3 +114,4 @@ while n <= 2:
     print(f"Transformer turned values from {AMPLIFIER_RESISTANCE}Ω and {VOLTAGE_SOURCE}V "
           f"to {SPEAKER_RESISTANCE}Ω and {speakerPower:.4f} W with {n:.2f} turns ratio")
     n += 0.01
+'''

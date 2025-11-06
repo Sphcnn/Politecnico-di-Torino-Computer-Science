@@ -353,7 +353,7 @@ elif 10**-11 <= wavelength < 10**-8:
 else:  
     print("Type: Gamma rays (λ < 10⁻¹¹ m)")
 '''
-
+''' 12
 import math
 
 # --- Halley's constants ---
@@ -380,4 +380,4 @@ else:
     print(f"🪐 You are still on Halley's surface. Your speed: {escapeVelocity:.2f} km/h")
 
 print(f"Escape velocity on Halley: {escapeVelocityHalley:.2f} km/h (approx)")
-
+'''
