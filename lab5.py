@@ -1,4 +1,4 @@
-#Exercises of Lab4  
+#Exercises of Lab5
 ''' 1
 PIN=1234
 
@@ -74,6 +74,8 @@ for i in range(10):
 
 print(f'You were at (0,0) and came to ({location_x},{location_y}) so you walked {math.sqrt((location_x**2)+(location_y**2)): .2f}')
 '''
+
+'''6
 growthPredators = float(input("Enter rate of growth of predators : "))
 destructionRate = float(input("Enter rate of destruction by predators : "))
 deathPredators = float(input("Enter rate of death of predators : "))
@@ -90,9 +92,24 @@ for i in range(period):
 
     if populationPrey <= 0:
         print(f"There is not anymore prey {populationPrey} number of predators : {populationPredators}")
+        break
     elif populationPredators <= 0:
         if populationPrey <= 0:
             print(f"There is not anymore predator {populationPredators} number of preys : {populationPrey}")
+            break
     else:
         print(f'The population of preys : {populationPrey : .2f} and predators {populationPredators : .2f} in {i+1}')
     i += 1
+'''
+SPEAKER_RESISTANCE = 8
+VOLTAGE_SOURCE = 40
+AMPLIFIER_RESISTANCE = 20
+
+n = float(input("Enter your turns ratio: "))
+speakerPower = 0
+
+while n <= 2:
+    speakerPower = ((n * VOLTAGE_SOURCE) ** 2) * SPEAKER_RESISTANCE / ((n**2 * SPEAKER_RESISTANCE + AMPLIFIER_RESISTANCE) ** 2)
+    print(f"Transformer turned values from {AMPLIFIER_RESISTANCE}Ω and {VOLTAGE_SOURCE}V "
+          f"to {SPEAKER_RESISTANCE}Ω and {speakerPower:.4f} W with {n:.2f} turns ratio")
+    n += 0.01
