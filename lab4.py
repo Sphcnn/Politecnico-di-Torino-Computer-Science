@@ -146,18 +146,44 @@ for num in primeList:
     print(num)
 ''' 
 
-text = input("Enter a word : ")
-
-for i in range(len(text)):
-    print(text[i:i+1])
-
-for i in range(1,len(text)):
-    print(text[i:i+2])
-
-print(text)
-
+''' 7
 text = input("Enter a word: ")
 
-for length in range(1, len(text) + 1):      # substring uzunluğu
-    for start in range(0, len(text) - length + 1):  # başlangıç indexi
-        print(text[start:start + length])
+for i in range(1, len(text) + 1):     
+    for j in range(0, len(text) - i + 1):  
+        print(text[j:j + i])
+'''
+
+previous = None
+count = 0
+
+while True:
+    line = input("Enter number (empty to finish): ")
+
+    if line == "":   # boş satır bitirir
+        break
+
+    current = int(line)
+
+    # İlk sayı ise
+    if previous is None:
+        previous = current
+        count = 1
+        continue
+
+    # Aynı sayı ise -> duplicate devam ediyor
+    if current == previous:
+        count += 1
+    else:
+        # Farklı sayı gelince seri bitmiş olur
+        if count >= 2:
+            print(previous)
+
+        # Yeni sayıya başla
+        previous = current
+        count = 1
+
+# Döngü bittiğinde son seriyi kontrol et
+if count >= 2:
+    print(previous)
+
