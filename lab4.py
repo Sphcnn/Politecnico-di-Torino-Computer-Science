@@ -265,3 +265,90 @@ for t in range(0,25):
     print(f'{t:>5} hours later : {A: <10.4f} percentage : %{((A/Azero)*100):<10.4f}')
 '''
 
+'''11
+G = 9.81
+DELTA_T = 0.01
+
+
+v0 = float(input("Enter the initial velocity (m/s): "))
+v = v0
+s = 0.0
+t = 0.0
+
+print("Time (s) | Simulated pos (m) | Exact pos (m) | Velocity (m/s)")
+print("-------------------------------------------------------------")
+
+
+while s >= 0:
+    pos_exact = (-0.5) * G * (t**2) + v0 * t
+
+    s = s + v * DELTA_T
+    v = v - G * DELTA_T
+    t += DELTA_T
+
+    if abs(t - round(t)) < DELTA_T/2:
+        print(f"{t:6.1f} | {s:17.2f} | {pos_exact:13.2f} | {v:10.2f}")
+'''
+print("Welcome to the messaging application. You can text your friend here. The message turn will be first user's until he or she will type \"Pass or pass\" \n To quit application you should type \"Quit or quit\" ")
+print("-"*20)
+username1 = input("Enter the first username : ")
+username2 = input("Enter the first username : ")
+turn = 1
+statement = True
+numberMessage = 0
+lengthList1 = []
+lengthList2 = []
+while statement:
+    if turn == 1:
+        text = input(f'{username1} Enter your message : ')
+        if text.lower() == "quit":
+            break
+        elif text.lower() == "pass":
+            turn = 1-turn
+        else:
+            print(f'{username1:.15s} :  {text:<.50s}')
+            numberMessage += 1
+            lengthList1.append(len(text))
+    else:
+        text = input(f'{username2} Enter your message : ')
+        if text.lower() == "quit":
+            break
+        elif text.lower() == "pass":
+            turn = 1-turn
+        else:
+            print(f'{username2:.15s} :  {text:<.50s}')
+            numberMessage += 1
+            lengthList2.append(len(text))
+if not lengthList1:
+    print(f'The shortest text of the chat longs {sorted(lengthList2)[0]} and this message is written by {username2}')
+    print(f'The longest text of the chat longs {sorted(lengthList2)[-1]} and this message is written by {username2}')
+elif not lengthList2:
+    print(f'The shortest text of the chat longs {sorted(lengthList1)[0]} and this message is written by {username2}')
+    print(f'The longest text of the chat longs {sorted(lengthList1)[-1]} and this message is written by {username2}')
+else:
+    if sorted(lengthList1)[0] < sorted(lengthList2)[0]:
+        print(f'The shortest text of the chat longs {sorted(lengthList1)[0]} and this message is written by {username2}')
+
+    elif sorted(lengthList1)[0] > sorted(lengthList2)[0]:
+        print(f'The shortest text of the chat longs {sorted(lengthList2)[0]} and this message is written by {username1}')
+
+    else:
+        print(f'The shortest text of the chat longs {sorted(lengthList2)[0]} and this message is written by both {username1} and {username2}')
+
+
+    if sorted(lengthList1)[-1] < sorted(lengthList2)[-1]:
+        print(f'The longest text of the chat longs {sorted(lengthList2)[-1]} and this message is written by {username2}')
+
+    elif sorted(lengthList1)[-1] > sorted(lengthList2)[-1]:
+        print(f'The longest text of the chat longs {sorted(lengthList1)[-1]} and this message is written by {username1}')
+
+    else:
+        print(f'The longest text of the chat longs {sorted(lengthList2)[-1]} and this message is written by both {username1} and {username2}')
+
+totalLen = 0
+for num in lengthList1:
+    totalLen += num
+for num in lengthList2:
+    totalLen += num    
+
+print(f'The total lenght of speech is {totalLen} !')
