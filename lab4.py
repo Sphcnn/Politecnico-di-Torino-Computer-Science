@@ -154,36 +154,114 @@ for i in range(1, len(text) + 1):
         print(text[j:j + i])
 '''
 
-previous = None
-count = 0
+''' 8
+numList = []
+a = input("Deneme : ")
+check = True
 
-while True:
-    line = input("Enter number (empty to finish): ")
+while check:
+    number = input("Enter number (quit = q): ")
+    if number.lower() == "q":
+        check = False
+    else:
+        numList.append(number)
 
-    if line == "":   # boş satır bitirir
+previous = numList[0]
+counter = 1
+lastList = []
+
+for i in range(1, len(numList)):
+    if numList[i] == previous:
+        counter += 1
+    else:
+        if counter >= 2:
+            lastList.append(previous)
+        previous = numList[i]
+        counter = 1
+
+if counter >= 2:
+    lastList.append(previous)
+else: pass
+
+if not lastList:
+    print("There is no duplicated number.")
+else:
+    print("Duplicated numbers:", lastList)
+'''
+
+''' 9
+import random
+
+numberMarble = random.randint(10, 100)
+player = random.randint(0, 1)  
+smartMode = random.randint(0, 1)  
+
+print(f"\nInitial marbles: {numberMarble}")
+print("First player:", "Computer" if player == 0 else "User")
+print("Computer mode:", "SMART" if smartMode == 1 else "DUMB")
+
+targetValues = [3, 7, 15, 31, 63]
+
+while numberMarble > 0:
+
+    if numberMarble == 1:
+        if player == 0:
+            print("\nYou WON! Computer took the last marble.")
+        else:
+            print("\nYou LOST! You took the last marble.")
         break
 
-    current = int(line)
+    maxTake = numberMarble // 2
 
-    # İlk sayı ise
-    if previous is None:
-        previous = current
-        count = 1
-        continue
+    if player == 0:
 
-    # Aynı sayı ise -> duplicate devam ediyor
-    if current == previous:
-        count += 1
+        if smartMode == 0:
+            taken = random.randint(1, maxTake)
+
+        else:
+            target = None
+            for t in targetValues:
+                if t < numberMarble:
+                    target = t
+
+            if target is None:
+                taken = random.randint(1, maxTake)
+
+            else:
+                desired = numberMarble - target
+                if 1 <= desired <= maxTake:
+                    taken = desired
+                else:
+                    taken = random.randint(1, maxTake)
+
+        print(f"\nComputer takes {taken} marbles.")
+        numberMarble -= taken
+        print(f"Marbles left: {numberMarble}")
+
     else:
-        # Farklı sayı gelince seri bitmiş olur
-        if count >= 2:
-            print(previous)
+        print(f"\nYour turn! Marbles left: {numberMarble}")
+        taken = int(input(f"How many marbles will you take? (1–{maxTake}): "))
 
-        # Yeni sayıya başla
-        previous = current
-        count = 1
+        if taken < 1 or taken > maxTake:
+            print("Invalid move — You lose for cheating!")
+            break
 
-# Döngü bittiğinde son seriyi kontrol et
-if count >= 2:
-    print(previous)
+        numberMarble -= taken
+        print(f"You took {taken}. Marbles left: {numberMarble}")
+
+    player = 1 - player
+'''
+''' 10
+import math 
+
+Azero = int(input("Enter the beginning value : "))
+Thalf = 6
+landa = (math.log(2))/Thalf
+t  = 1
+e = math.e
+
+for t in range(0,25):
+    A = Azero*( e **(-landa*t))
+    print(f'{t:>5} hours later : {A: <10.4f} percentage : %{((A/Azero)*100):<10.4f}')
+'''
 
