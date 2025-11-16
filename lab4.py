@@ -289,6 +289,8 @@ while s >= 0:
     if abs(t - round(t)) < DELTA_T/2:
         print(f"{t:6.1f} | {s:17.2f} | {pos_exact:13.2f} | {v:10.2f}")
 '''
+
+''' 12
 print("Welcome to the messaging application. You can text your friend here. The message turn will be first user's until he or she will type \"Pass or pass\" \n To quit application you should type \"Quit or quit\" ")
 print("-"*20)
 username1 = input("Enter the first username : ")
@@ -352,3 +354,5 @@ for num in lengthList2:
     totalLen += num    
 
 print(f'The total lenght of speech is {totalLen} !')
+print(f'Total number of message is {numberMessage}')
+'''
