@@ -203,6 +203,8 @@ for num in range(20):
     numbers.append(random.randint(1,99))
 print(f'{numbers} is our list \n It is sorted as {sorted(numbers)} \n Sorted from back to up {sorted(numbers, reverse = True)}')
 '''
+
+''' 7
 numList = []
 statement = True
 
@@ -217,3 +219,73 @@ sum = 0
 for i in range(1,len(numList)):
     sum = sum + numList[i]
 print(f'Sum of the all elements of list : {sum}')
+'''
+''' 8
+list1 = []
+statement = True
+
+while statement:
+    number = input("Enter the experiment values (Press q for quit):")
+    if number.lower() == "q":
+        statement = False
+    else:
+        list1.append(float(number))
+
+print(list1)
+
+for i,element in enumerate(list1):
+    if i == 0: 
+        list1[i] = (list1[i]+list1[i+1])/2
+    elif i == len(list1)-1:
+        list1[i] = (list1[i]+list1[i-1])/2
+    
+    else:
+        list1[i] = (list1[i-1]+list1[i]+list1[i+1])/3
+
+for i in range(len(list1)):
+    print(f'{i}. element of the list is {list1[i]}')
+'''
+
+# başlangıç
+length = int(input("Kaç park yeri var? "))
+
+# False = boş, True = dolu
+row = [False] * length
+
+def print_row():
+    for slot in row:
+        print("X" if slot else "_", end=" ")
+    print()
+
+print_row()
+
+car_number = int(input("Kaç araba gelecek? "))
+
+for car in range(car_number):
+
+    # --- En uzun boş aralığı bul ---
+    longest_start = 0
+    longest_len = 0
+
+    i = 0
+    while i < length:
+        if not row[i]:                 # boş yer buldu
+            start = i
+            while i < length and not row[i]:
+                i += 1
+            segment_length = i - start
+
+            if segment_length > longest_len:
+                longest_len = segment_length
+                longest_start = start
+        else:
+            i += 1
+
+    # Ortaya park et
+    place = longest_start + longest_len // 2
+    row[place] = True
+
+    print_row()
+
+    
+                    
