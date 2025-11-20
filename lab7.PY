@@ -173,12 +173,11 @@ def sumTable(table):
     return total
 main()
 '''
+
+''' 4
 def main():
     list1 = getList()
     listOrder(list1)
-    for element in list1:
-        print(id(element))
-
 
 def getList():
     name = []
@@ -201,5 +200,53 @@ def listOrder(name):
     print(f'The state of {name} that all elements are carried left is : {newList}')
     
 main()
+''' 
+
+def main():
+    list1 = getList("First")
+    list2 = getList("Second")
+    mergedList = mergeList(list1,list2)
+    print(f'Your first list : {list1} \n  Your second list : {list2} \n  The merged and sorted version of your lists : {mergedList}')
+def getList(name):
+    numList = []
+    statement = True
+    while statement:
+        num = input(f"Enter number into {name} (Press q to quit) : ")
+        if num.lower() == "q":
+            statement = False
+        else:
+            numList.append(int(num))
+    return numList
+
+def mergeList(numlist1,numlist2):
+    mergedList = []
+    
+    if len(numlist1) > len(numlist2):
+        i = 0
+        j = 0
+        if i > len(numlist1):
+            for a in range(j,len(numlist2)):
+                mergedList.append(numlist2[j])
+            
+        elif j > len(numlist2):
+            for a in range(i,len(numlist1[i])):
+                mergedList.append(numlist1[i])
+        else:
+            if numlist1[i] < numlist2[j]:
+                mergedList.append(numlist1[i])
+                i += 1
+            elif numlist1[i] > numlist1[j]:
+                mergedList.append(numlist2[j])
+                j += 1
+            else:
+                mergedList.append(numlist1[i])
+                mergedList.append(numlist2[j])
+                i += 1
+                j += 1
+    return mergedList      
+
+
+main()
+
 
 
