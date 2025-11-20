@@ -218,32 +218,35 @@ def getList(name):
             numList.append(int(num))
     return numList
 
-def mergeList(numlist1,numlist2):
+def mergeList(numlist1, numlist2):
     mergedList = []
-    
-    if len(numlist1) > len(numlist2):
-        i = 0
-        j = 0
-        if i > len(numlist1):
-            for a in range(j,len(numlist2)):
-                mergedList.append(numlist2[j])
-            
-        elif j > len(numlist2):
-            for a in range(i,len(numlist1[i])):
-                mergedList.append(numlist1[i])
+    i = 0
+    j = 0
+
+
+    while i < len(numlist1) and j < len(numlist2):
+        if numlist1[i] < numlist2[j]:
+            mergedList.append(numlist1[i])
+            i += 1
+        elif numlist1[i] > numlist2[j]:
+            mergedList.append(numlist2[j])
+            j += 1
         else:
-            if numlist1[i] < numlist2[j]:
-                mergedList.append(numlist1[i])
-                i += 1
-            elif numlist1[i] > numlist1[j]:
-                mergedList.append(numlist2[j])
-                j += 1
-            else:
-                mergedList.append(numlist1[i])
-                mergedList.append(numlist2[j])
-                i += 1
-                j += 1
-    return mergedList      
+            mergedList.append(numlist1[i])
+            mergedList.append(numlist2[j])
+            i += 1
+            j += 1
+
+    while i < len(numlist1):
+        mergedList.append(numlist1[i])
+        i += 1
+
+    while j < len(numlist2):
+        mergedList.append(numlist2[j])
+        j += 1
+
+    return mergedList
+      
 
 
 main()
