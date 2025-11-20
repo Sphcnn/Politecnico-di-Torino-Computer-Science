@@ -201,7 +201,7 @@ def listOrder(name):
     
 main()
 ''' 
-
+''' 5
 def main():
     list1 = getList("First")
     list2 = getList("Second")
@@ -247,9 +247,8 @@ def mergeList(numlist1, numlist2):
 
     return mergedList
       
-
-
 main()
+'''
 
-
-
+list = [1,2,3,4,5]
+print(list[7])
