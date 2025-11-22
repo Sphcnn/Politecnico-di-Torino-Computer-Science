@@ -1,53 +1,105 @@
 #Cinema Booking App (will be improved)
 LETTERS = ["A","B","C","D","E","F","G","H","I","J"]
-TICKET_PRICE = 10 
-planCinema = []
+TICKET_PRICE = 10
 
-for i in range(10):
-    row = [j+1 for j in range(10)]  # her seferinde yeni satır
-    planCinema.append(row)
+def main():
+    name = input("Enter your name : ")
+    planCinema = create_cinema_plan()
+    print_cinema_plan(planCinema)
 
-for i in range(10):
-    for j in range(10):
-        planCinema[i][j] = j+1
+    sold_seats, total_cost = choose_tickets(planCinema)
+    print_receipt(name,sold_seats, total_cost)
 
-for i,letter in enumerate(LETTERS):
-    print(f'{letter} {planCinema[i]}')
-    print()
 
-ticketNumber = int(input("How many tickets do you want to buy ? "))
-ticketCost = 0
+def create_cinema_plan():
 
-for k in range(ticketNumber):
-    ticket = input("Choose your ticket please : ")
-    ticketRow = ticket[0]
-    ticketColumn = int(ticket[1:])
-    print(ticketRow,ticketColumn)
+    planCinema = []
+    for i in range(10):
+        row = [j + 1 for j in range(10)]
+        planCinema.append(row)
+    return planCinema
 
-    for i,letter in enumerate(LETTERS):
-        if letter == ticketRow:
-            if planCinema[i][ticketColumn-1] == 0:
-                print(f'Sorry this seat is already sold. Choose another seat.')
-                ticket = input("Choose your ticket please : ")
-                ticketRow = ticket[0]
-                ticketColumn = ticket[1:]
-                break
+
+def print_cinema_plan(planCinema):
+
+    for i, letter in enumerate(LETTERS):
+        print(f'{letter} {planCinema[i]}')
+        print()
+
+
+def choose_tickets(planCinema):
+   
+    ticketNumber = int(input("How many tickets do you want to buy? "))
+    ticketCost = 0
+    sold_seats = []  
+
+    for k in range(ticketNumber):
+        while True:
+            ticket = input("Choose your ticket (example: A1): ")
+            if len(ticket) < 2:
+                print("Invalid format. Try again (example: A1).")
+                continue
+
+            ticketRow = ticket[0].upper()
+            try:
+                ticketColumn = int(ticket[1:])
+            except ValueError:
+                print("Invalid seat number. Try again.")
+                continue
+
+            
+            if ticketRow not in LETTERS or not (1 <= ticketColumn <= 10):
+                print("You can only choose among valid seats (A-J and 1-10).")
+                print_cinema_plan(planCinema)
+                continue
+
+            
+            row_index = LETTERS.index(ticketRow)
+            col_index = ticketColumn - 1
+
+         
+            if planCinema[row_index][col_index] == 0:
+                print("Sorry, this seat is already sold. Choose another seat.")
+                print_cinema_plan(planCinema)
+                continue
             else:
-                print(f'Okay you can buy this seat for {TICKET_PRICE} euro \n ')
-                ticketCost = ticketCost + TICKET_PRICE
-                planCinema[i][ticketColumn-1] = 0
-                for j,letter in enumerate(LETTERS):
-                    print(f'{letter} {planCinema[j]}')
-                    print()
-                break
+                print(f'Okay, you can buy this seat for {TICKET_PRICE} euro.\n')
+                ticketCost += TICKET_PRICE
+                planCinema[row_index][col_index] = 0
+                sold_seats.append(ticketRow + str(ticketColumn))
+                print_cinema_plan(planCinema)
+                break  
+
+    return sold_seats, ticketCost
+
+
+def print_receipt(name,sold_seats, total_cost):
+    """
+    Kullanıcının aldığı tüm koltukları ve toplam ödemeyi yazdıran fiş fonksiyonu.
+    """
+    print(name)
+    print("\n" + "-" * 40)
+    print("RECEIPT")
+    print("-" * 40)
+
+    if not sold_seats:
+        print("You did not buy any tickets.")
     else:
-        print("You can only choose among these seats")
-        for j,letter in enumerate(LETTERS):
-            print(f'{letter} {planCinema[j]}')
-            print()
-        ticket = input("Choose your ticket please : ")
-    k += 1
-print(f'Total cost of your tickets {int(ticketCost)} ')
+        print("You bought the following seats:")
+        for seat in sold_seats:
+            print(f"- Seat {seat}: {TICKET_PRICE} euro")
+        print("-" * 40)
+        print(f"Total cost of your tickets: {int(total_cost)} euro")
+
+    print("-" * 40)
+    print("Enjoy the movie!")
+    print("-" * 40)
+
+
+
+
+main()
+
 
 
 
