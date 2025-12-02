@@ -173,7 +173,6 @@ def sumTable(table):
     return total
 main()
 '''
-
 ''' 4
 def main():
     list1 = getList()
@@ -286,8 +285,7 @@ def neighbourhood(numTable):
 
 
 main()"""
-
-
+''' 7 Tekrar bak
 THEATER_PLAN = [
     [10,10,10,10,10,10,10,10,10,10],
     [10,10,10,10,10,10,10,10,10,10],
@@ -433,5 +431,109 @@ def main():
         print(f"Total: {total}€")
     print("=" * 50)
 
+main()
+'''
+
+''' Do not execute this code if you like your computer I was curious about whether I can find magic square but I could not due to lack of ram. My computer was about to crush.
+import random
+
+def main():
+    tableSize = int(input("Enter the size of your table : "))
+    emptyTable = createTable(tableSize)
+    printTable(emptyTable)
+    filledTable = fulfill(emptyTable,tableSize)
+    numberofTry = 0
+
+    if checker(filledTable,tableSize): print("Your matrix is a magic square"); print(f'Number of try : {numberofTry}')
+    else: 
+        statement = checker(filledTable,tableSize)
+        while statement != True:
+            try:
+                filledTable = fulfill(emptyTable,tableSize)
+                print("-"*10)
+                printTable(filledTable)
+                statement = checker(filledTable,tableSize)
+                numberofTry += 1
+                print(f'Number of try : {numberofTry}')
+                if numberofTry > 10000:
+                    print("I can not find the magic square version of your table")
+                    statement = True
+                else:pass
+            except KeyboardInterrupt:
+                print("I was about to find magic square version. You were not brave enough to find it ")
+                statement = True
+            finally:
+                print("Programme was ended by user ! ")
+
+def printTable(table):
+    for line in table:
+        print(line)
+        print()
+
+def createTable(n):
+    table = []
+    for i in range(n):
+        line = [0]*n
+        table.append(line)
+    return table
+
+def fulfill(table,n):
+    numList = []
+    lowBound = 1
+    upBound = n*n
+    for number in range(upBound):
+        numList.append(lowBound)
+        lowBound += 1
+    
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            print(numList)
+            num = random.choice(numList)
+            table[i][j] = num
+            numList.remove(num)
+            
+
+    return table
+
+def checker(table,n):
+    sumListRow = []
+    sumListColumn = []
+    sumListDiagonal1 = []
+    sumListDiagonal2 = []
+    total = 0
+    #sum of elements in row
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            total = total + table[i][j]
+            sumListRow.append(total)
+        total = 0
+    #sum of elements in column
+    for j in range(len(table)):
+        for i in range(len(table[i])):
+            total = total + table[i][j]
+            sumListColumn.append(total)
+        total = 0
+    #sum of diagonal 1
+    i,j = 0,0
+    while i <= n-1 and j <= n-1 :
+        total = total + table[i][j]
+        sumListDiagonal1.append(total)
+        i += 1
+        j += 1
+    
+    i = n-1
+    j = 0
+
+    while i >= 0 and j <= n-1 :
+        total = total + table[i][j]
+        sumListDiagonal2.append(total)
+        i -= 1
+        j += 1
+
+    if set(sumListColumn) == set(sumListRow) == set(sumListDiagonal1) == set(sumListDiagonal2):
+        return True
+
+    else: return False          
 
 main()
+'''
