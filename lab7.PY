@@ -433,8 +433,7 @@ def main():
 
 main()
 '''
-
-''' Do not execute this code if you like your computer I was curious about whether I can find magic square but I could not due to lack of ram. My computer was about to crush.
+''' Do not execute this code if you like your computer I was curious about whether I can find magic square but I could not due to lack of ram. My computer was about to crush. 8
 import random
 
 def main():
@@ -540,3 +539,127 @@ def checker(table, n):
 main()
 
 '''
+'''#TICTACTOE GAME 9
+SIZETABLE = 3
+
+def main():
+    playMap = createTable(SIZETABLE)
+    user1 = input("Enter the name of player 1 : ")
+    user2 = input("Enter the name of player 2 : ")
+    tictactoe(playMap, user1, user2)
+
+def printTable(table):
+    print("   1   2   3")
+    print("  " + "-" * 13)
+    for i, row in enumerate(table, start=1):
+        cells = []
+        for cell in row:
+            if cell == 0:
+                ch = " "
+            else:
+                ch = cell
+            cells.append(f"{ch:^3}")
+        print(f"{i} |" + "|".join(cells) + "|")
+        print("  " + "-" * 13)
+    print()
+
+def createTable(n):
+    table = []
+    for i in range(n):
+        line = [0] * n
+        table.append(line)
+    return table
+
+def checker(table, symbol):
+    n = len(table)
+    for row in table:
+        if all(cell == symbol for cell in row):
+            return True
+    for col in range(n):
+        if all(table[row][col] == symbol for row in range(n)):
+            return True
+    if all(table[i][i] == symbol for i in range(n)):
+        return True
+    if all(table[i][n - 1 - i] == symbol for i in range(n)):
+        return True
+    return False
+
+def is_full(table):
+    for row in table:
+        for cell in row:
+            if cell == 0:
+                return False
+    return True
+
+def ask_move(table, player_name, symbol):
+    while True:
+        location = input(f"{player_name}, enter the coordinates (row and column, e.g. 11, 23): ")
+        if len(location) != 2 or not location[0].isdigit() or not location[1].isdigit():
+            print("You have to choose a valid place")
+            continue
+        x = int(location[0])
+        y = int(location[1])
+        if not (1 <= x <= SIZETABLE and 1 <= y <= SIZETABLE):
+            print("You have to choose a valid place")
+            continue
+        if table[x - 1][y - 1] in ("O", "X"):
+            print("This place is not empty")
+            continue
+        return x - 1, y - 1
+
+def tictactoe(table, usr1, usr2):
+    current = 0
+    players = [(usr1, "O"), (usr2, "X")]
+    while True:
+        printTable(table)
+        name, symbol = players[current]
+        print(f"{name}'s turn ({symbol})")
+        i, j = ask_move(table, name, symbol)
+        table[i][j] = symbol
+        if checker(table, symbol):
+            printTable(table)
+            print(f"Congratulations {name}, you won!")
+            break
+        if is_full(table):
+            printTable(table)
+            print("The game is a tie!")
+            break
+        current = 1 - current
+
+main()'''
+
+
+''' 10
+def main():
+    countryNames = {
+                    'Egypt':116500000,
+                    'Italy':60360000,
+                    'Germany':83190000,
+                    'France':67060000,
+                    'Spain':47350000,
+                    'Portugal':10280000,
+                    'Greece':10720000,
+                    'Belgium':11560000,
+                    'Netherlands':17440000,
+                    'Switzerland':8655000,
+                    'Austria':9006000,
+                    'Sweden':10330000,
+                    'Norway':5420000,
+                    'Denmark':5822000,
+                    'Finland':5521000,
+                    'Turkey':84340000,
+                    'Poland':38380000,
+                    'Czech Republic':10710000,
+                    'Hungary':9773000,
+    }
+
+    for country, population in countryNames.items():
+        visualation(population,country)
+        print("-"*20)
+
+def visualation(number,country):
+    numOfstar = (number // 10000000) + 1
+    print(f'{country} : {"*"*numOfstar}')
+
+
+main()'''
