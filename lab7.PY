@@ -441,99 +441,102 @@ def main():
     tableSize = int(input("Enter the size of your table : "))
     emptyTable = createTable(tableSize)
     printTable(emptyTable)
-    filledTable = fulfill(emptyTable,tableSize)
+    filledTable = fulfill(emptyTable, tableSize)
     numberofTry = 0
-
-    if checker(filledTable,tableSize): print("Your matrix is a magic square"); print(f'Number of try : {numberofTry}')
-    else: 
-        statement = checker(filledTable,tableSize)
+    numberofTry += 1
+    print("-" * 10)
+    printTable(filledTable)
+    if checker(filledTable, tableSize):
+        print("Your matrix is a magic square")
+        print(f'Number of try : {numberofTry}')
+    else:
+        statement = False
         while statement != True:
             try:
-                filledTable = fulfill(emptyTable,tableSize)
-                print("-"*10)
-                printTable(filledTable)
-                statement = checker(filledTable,tableSize)
+                filledTable = fulfill(emptyTable, tableSize)
                 numberofTry += 1
+
+                print("-" * 10)
+                printTable(filledTable)
+
+                statement = checker(filledTable, tableSize)
                 print(f'Number of try : {numberofTry}')
-                if numberofTry > 10000:
+
+                if numberofTry > 100000:
                     print("I can not find the magic square version of your table")
                     statement = True
-                else:pass
+
             except KeyboardInterrupt:
                 print("I was about to find magic square version. You were not brave enough to find it ")
                 statement = True
-            finally:
-                print("Programme was ended by user ! ")
+
 
 def printTable(table):
     for line in table:
         print(line)
-        print()
+    print()
 
 def createTable(n):
     table = []
     for i in range(n):
-        line = [0]*n
+        line = [0] * n
         table.append(line)
     return table
 
-def fulfill(table,n):
+def fulfill(table, n):
     numList = []
     lowBound = 1
-    upBound = n*n
+    upBound = n * n
     for number in range(upBound):
         numList.append(lowBound)
         lowBound += 1
-    
+
+
     for i in range(len(table)):
         for j in range(len(table[i])):
-            print(numList)
+            print(numList)  
             num = random.choice(numList)
             table[i][j] = num
             numList.remove(num)
-            
 
     return table
 
-def checker(table,n):
+def checker(table, n):
     sumListRow = []
     sumListColumn = []
     sumListDiagonal1 = []
     sumListDiagonal2 = []
-    total = 0
-    #sum of elements in row
     for i in range(len(table)):
+        total = 0
         for j in range(len(table[i])):
-            total = total + table[i][j]
-            sumListRow.append(total)
-        total = 0
-    #sum of elements in column
+            total += table[i][j]
+        sumListRow.append(total)      
+
     for j in range(len(table)):
-        for i in range(len(table[i])):
-            total = total + table[i][j]
-            sumListColumn.append(total)
         total = 0
-    #sum of diagonal 1
-    i,j = 0,0
-    while i <= n-1 and j <= n-1 :
-        total = total + table[i][j]
-        sumListDiagonal1.append(total)
-        i += 1
-        j += 1
-    
-    i = n-1
-    j = 0
+        for i in range(len(table)):
+            total += table[i][j]
+        sumListColumn.append(total)   # HER sütun için 1 tane toplam
 
-    while i >= 0 and j <= n-1 :
-        total = total + table[i][j]
-        sumListDiagonal2.append(total)
-        i -= 1
-        j += 1
+    total = 0
+    for i in range(n):
+        total += table[i][i]
+    sumListDiagonal1.append(total)    # sadece tek bir toplam
 
-    if set(sumListColumn) == set(sumListRow) == set(sumListDiagonal1) == set(sumListDiagonal2):
-        return True
 
-    else: return False          
+    total = 0
+    for i in range(n):
+        total += table[i][n - 1 - i]
+    sumListDiagonal2.append(total)    # yine tek bir toplam
+    target = sumListRow[0]
+    all_sums = sumListRow + sumListColumn + sumListDiagonal1 + sumListDiagonal2
+
+    for s in all_sums:
+        if s != target:
+            return False
+
+    return True
 
 main()
+
 '''
