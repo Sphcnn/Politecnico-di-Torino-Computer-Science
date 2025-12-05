@@ -63,6 +63,8 @@ def main():
 
 main()
 '''
+
+"""4
 def main():
     fileNames = ["address.txt", "book.txt"]
     addressWords = []
@@ -140,3 +142,4 @@ def search(word: str, element: list):
     return index
 
 main()
+"""
