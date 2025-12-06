@@ -199,6 +199,7 @@ def infoGiver(studentID: int, results: dict):
 main()
 """
 
+""" 6
 def main():
     bondData = {}
     bonds = []
@@ -228,3 +229,4 @@ def converter(bond:str, bondData:dict):
 
 
 main()
+"""
