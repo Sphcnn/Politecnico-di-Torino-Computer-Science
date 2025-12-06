@@ -143,8 +143,88 @@ def search(word: str, element: list):
 
 main()"""
 
+""" 5
 def main():
+    lessons = []
+    results = {}
+    studentID = int(input("Enter the student ID: "))
+
+    infile = None
+    try:
+        infile = open("classes.txt", "r")
+        for i, line in enumerate(infile):
+            line = line.strip()
+            lessons.append(line)
+    except IOError:
+        print("Opening process has been canceled")
+    finally:
+        if infile is not None:
+            infile.close()
+        if lessons:
+            print("Reading operation has been done succesfuly")
+        else:
+            print("File has not been opened succesfuly")
+
+    results.update(gradeWriter(studentID, lessons))
+    infoGiver(studentID, results)
 
 
+def gradeWriter(studentID: int, lessons: list):
+    grades = {}
+    for lesson in lessons:
+        lessonFile = None
+        try:
+            lessonFile = open(f"{lesson}.txt", "r")
+            for line in lessonFile:
+                line = line.strip()
+                if not line:
+                    continue
+                content = line.split()  # StudentID Grade
+                if int(content[0]) == studentID:
+                    grades[lesson] = content[1]
+        except IOError:
+            print(f"{lesson}.txt could not be opened")
+        finally:
+            if lessonFile is not None:
+                lessonFile.close()
+    return grades
 
 
+def infoGiver(studentID: int, results: dict):
+    print(f"Student ID: {studentID}")
+    for key, value in results.items():
+        print(f"{key} {value}")
+
+
+main()
+"""
+
+def main():
+    bondData = {}
+    bonds = []
+    information = []
+    try:
+        infile = open("bond_data.txt")
+        for line in infile:
+            line = line.rstrip()
+            temp = []
+            temp.append(line.split(" "))
+            bonds.append(temp[0][0])
+            print(temp)
+            information.append(temp[0][1:])
+    except IOError: pass
+    
+    for i,element in enumerate(bonds):
+        tempDict = {f"{element}":information[i]}
+        bondData.update(tempDict)
+    print(bondData)
+    bond = input("Write the bonding chemicals as X|X or X||X or X|||X : ")
+    converter(bond, bondData)
+
+def converter(bond:str, bondData:dict):
+    for key,value in bondData.items():
+        if key.strip().lower() == bond.strip().lower():
+            print(f'The bond\'s({bond}) length is {bondData[key][0]} and this bond\'s energy is {bondData[key][1]}')
+
+
+main()
