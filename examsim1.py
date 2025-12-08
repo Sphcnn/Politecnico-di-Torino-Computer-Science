@@ -19,7 +19,7 @@ def summarize(id:int,receipt:list):
     check = 0
     for i in range(len(receipt)):
         if int(receipt[i][0]) == id: check = 1
-    if check == 0: print("Your ID is invalid")
+    if check == 0: print("No purchases found for this customer.")
     else:
         productList = []
         qualityList = []
