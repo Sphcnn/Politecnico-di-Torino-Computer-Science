@@ -1,44 +1,59 @@
 def main():
     infile = None
     content = []
-    studentID = int(input("Enter student ID :"))
-    try: 
-        infile = open("scores.txt","r")
+    studentID = int(input("Enter student ID: "))
+    try:
+        infile = open("scores.txt", "r")
         for line in infile:
             line = line.rstrip()
+            if line == "":
+                continue
             content.append(line.split())
-    except IOError: print("Reading operation has been failed")
+    except IOError:
+        print("Reading operation has been failed")
     finally:
-        if infile is not None: infile.close()
-        if content: print("Reading operation has been done succesfuly ")
-        else: print("Reading operation has not been done succesfuly ")
-    summarize(studentID,content)
+        if infile is not None:
+            infile.close()
+        if content:
+            print("Reading operation has been done succesfuly")
+        else:
+            print("Reading operation has not been done succesfuly")
 
-def summarize(id:int, data:list) -> dict:
+    summarize(studentID, content)
+
+
+def summarize(id: int, data: list) -> None:
+    returnDict = {}
+    # ilgili öğrencinin derslerini topla
+    for row in data:
+        if int(row[0]) == id:
+            course = row[1]
+            score = int(row[2])
+            returnDict[course] = score
+
+    if not returnDict:
+        print("No exam records found for this student.")
+        return
+
+    print(f"Student ID: {id}")
+    print(f'{"Course :":<25} {"Score :":<25}')
+
     total = 0
     numLesson = 0
-    checker = 0
-    returnDict = {}
-    tempDict = {}
-    highScore = 0
-    for i in range(len(data)):
-            if int(data[i][0]) == id:
-                tempDict = {f'{data[i][1]}': int(data[i][2])}
-                returnDict.update(tempDict)
-                checker += 1
-                highScore = int(data[i][2])
-    if checker == 0: print("No exam records found for this student.")
-    else:
-        print(f'Student ID : {id}')
-        print(f'{"Course :":<25} {"Score :":<25}')
-        for key, value in returnDict.items():
-            if value > highScore: highScore = value; highestLesson = key
-            else: continue
-            print(f'{key+":":<25} {value:<25}')
-            numLesson += 1
-            total = total + value
-        print(f'{"Avarage Score :":<25} {total/numLesson:<25}')
-        print(f'{"Highest scoring lesson:":<25} {highestLesson:<25}')
-        
+    highScore = -1
+    highestLesson = ""
+
+    for course, score in returnDict.items():
+        print(f"{course + ':':<25} {score:<25}")
+        total += score
+        numLesson += 1
+
+        if score > highScore:
+            highScore = score
+            highestLesson = course
+
+    print(f'{"Average score :":<25} {total / numLesson:<25}')
+    print(f'{"Highest scoring course:":<25} {highestLesson:<25}')
+
 
 main()
