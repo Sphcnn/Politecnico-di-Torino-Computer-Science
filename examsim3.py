@@ -9,11 +9,7 @@ def main():
         if sentence[0].upper() == "BORROW": borrowed.append(sentence[1:])
         elif sentence[0].upper() == "RETURN": returned.append(sentence[1:])
         else: print("Invalid operation !")
-    print(borrowed)
-    print(returned)    
     borrowed, returned = compare(borrowed, returned)
-    print(borrowed)
-    print(returned)
     print(f'{"UserName :":<15}:\t {"Borrowed Books :":<15}')
     write(borrowed)
 
