@@ -242,9 +242,23 @@ def main():
     rifleDict = classification("Rifle",content)
     sniperifleDict = classification("SniperRifle",content)
     semiautosniperDict = classification("Semi-autoSniper",content)
-
+    
+    print(pistolDict)
     print(pistolDict)
     cost(3500, content)
+
+    print(f'The avarage cost of Pistols : {avarage(pistolDict)}')
+    print(f'The avarage cost of Shotguns : {avarage(shotgunDict)}')
+    print(f'The avarage cost of Machineguns : {avarage(machinegunDict)}')
+    print(f'The avarage cost of SMGs : {avarage(smgDict )}')
+    print(f'The avarage cost of Rifles : {avarage(rifleDict )}')
+    print(f'The avarage cost of Sniper Rifles : {avarage(sniperifleDict )}')
+    print(f'The avarage cost of Semi-auto Snipers : {avarage(semiautosniperDict )}')
+
+
+    game(pistolDict , shotgunDict, machinegunDict,smgDict,rifleDict,
+         sniperifleDict,semiautosniperDict,800)
+    
 
 def classification(name:str, menu:list) -> dict:
 
@@ -255,7 +269,7 @@ def classification(name:str, menu:list) -> dict:
         if menu[i][0].lower() == name.lower():
             tempList.append(menu[i][2])
             tempList.append(menu[i][3])  
-            tempDict = {f'{menu[i][1]}':f'{tempList}'}
+            tempDict = {f'{menu[i][1]}' : tempList}
             returnDict.update(tempDict)
 
     return returnDict
@@ -263,23 +277,75 @@ def classification(name:str, menu:list) -> dict:
 
 def cost(threshold:int, menu:list):
     returnList = []
-    for i in range(len(list)):
+    for i in range(len(menu)):
         tempList = []
-        if int(list[i][2]) >= 3500:
-            tempList.append(list[i][1])
-            tempList.append(list[i][2])
-        returnList.append(tempList)
+        if int(menu[i][2]) >= 3500:
+            tempList.append(menu[i][1])
+            tempList.append(menu[i][2])
+            returnList.append(tempList)
     
     print("Guns which are expensive than 3500")
     print("-"*15)
     print(f'{"Gun :":<15}\t {"Price:":<15}')
     for i in range(len(returnList)):
-        for j in range(len(range[i])):
-            print(f'{list[i][j]:<15}', endswith = "\t")
+            print(f'{returnList[i][0]:<15}\t {returnList[i][1]}')
+
+def avarage(menu:dict) -> float:
+    total = 0
+    for key, value in menu.items():
+        total += int(value[0])
+    average = total / len(menu)
+    return average
 
 
+def game(pistolDict:dict , shotgunDict:dict, machinegunDict:dict,
+         smgDict:dict,rifleDict:dict,sniperifleDict:dict,semiautosniperDict:dict, money:int):
+    gunMenuDict = {1:pistolDict,    
+                   2:shotgunDict,
+                   3:machinegunDict,
+                   4:smgDict,
+                   5:rifleDict,
+                   6:sniperifleDict,
+                   7:semiautosniperDict}
+    money = 800
+    round = 1
+    while round < 16:
+        menuSelect = int(input(f'ROUND {round}. Select gun menu (1-Pistol, 2-Shotgun, 3-Machinegun, 4-SMG, 5-Rifle, 6-SniperRifle, 7-Semi-autoSniper): '))
+        if menuSelect in gunMenuDict:
+            print(f'{"Gun":<20} {"Price":<10} {"Damage":<10}')
+            print("-"*40)
+            for key, value in gunMenuDict[menuSelect].items():
+                print(f'{key:<20} {value[0]:<10} {value[1]:<10}')
+            print(f'You have {money} money')
+        else: print("Invalid menu selection")
+        
+        gunSelect = input("Select the gun you want to buy (Press q to return previous menu): ")
+        while gunSelect == "q":
+            menuSelect = int(input(f'ROUND {round}. Select gun menu (1-Pistol, 2-Shotgun, 3-Machinegun, 4-SMG, 5-Rifle, 6-SniperRifle, 7-Semi-autoSniper): '))
+            if menuSelect in gunMenuDict:
+                print(f'{"Gun":<20} {"Price":<10} {"Damage":<10}')
+                print("-"*40)
+                for key, value in gunMenuDict[menuSelect].items():
+                    print(f'{key:<20} {value[0]:<10} {value[1]:<10}')
+                print(f'You have {money} money')
+            else: print("Invalid menu selection")
+            gunSelect = input("Select the gun you want to buy (Press q to return previous menu): ")
+        if gunSelect not in gunMenuDict[menuSelect]:
+            print("Invalid gun selection")
+        elif int(gunMenuDict[menuSelect][gunSelect][0]) > money:
+            print("You don't have enough money to buy this gun")
+        else:
+            money -= int(gunMenuDict[menuSelect][gunSelect][0])
+            print(f'You bought {gunSelect} which costs {gunMenuDict[menuSelect][gunSelect][0]} damages {gunMenuDict[menuSelect][gunSelect][1]} and you have {money} left')
+        kills = int(input("Enter the number of kills you made this round : "))
+        money += kills * 300
+        if input("Did you die this round? (y/n): ").lower() == 'y':death = True 
+        else: death = False
+        if death:
+            money -= 500
+            print(f'You died this round and lost 500. You have {money} left')
 
-
+        round += 1
 
 
 main()
