@@ -158,6 +158,7 @@ def replacer(word1:str, word2:str , lyrics:list) -> list:
 main()
 """
 
+""" 5
 def main():
     infile = None
     content = []
@@ -215,3 +216,71 @@ def controler(lyrics:list):
     return temp
 
 main()
+"""
+
+def main():
+    infile = None
+    content = []
+
+    try:
+        infile = open("cs1.6.csv","r")
+        infile.readline()
+        for line in infile:
+            line = line.rstrip()
+            content.append(line.split(","))
+
+    except IOError: print("File does not exist")
+    finally:
+        if infile is not None: infile.close(); print("Reading operation has been done successfuly")
+        else: print("Reading operation has been canceled")
+        if not content: print("File is empty")
+
+    pistolDict = classification("Pistol",content)
+    shotgunDict = classification("Shotgun",content)
+    machinegunDict = classification("Machinegun",content)
+    smgDict = classification("SMG",content)
+    rifleDict = classification("Rifle",content)
+    sniperifleDict = classification("SniperRifle",content)
+    semiautosniperDict = classification("Semi-autoSniper",content)
+
+    print(pistolDict)
+    cost(3500, content)
+
+def classification(name:str, menu:list) -> dict:
+
+    returnDict = {}
+    for i in range(len(menu)):
+        tempDict = {}
+        tempList = []
+        if menu[i][0].lower() == name.lower():
+            tempList.append(menu[i][2])
+            tempList.append(menu[i][3])  
+            tempDict = {f'{menu[i][1]}':f'{tempList}'}
+            returnDict.update(tempDict)
+
+    return returnDict
+
+
+def cost(threshold:int, menu:list):
+    returnList = []
+    for i in range(len(list)):
+        tempList = []
+        if int(list[i][2]) >= 3500:
+            tempList.append(list[i][1])
+            tempList.append(list[i][2])
+        returnList.append(tempList)
+    
+    print("Guns which are expensive than 3500")
+    print("-"*15)
+    print(f'{"Gun :":<15}\t {"Price:":<15}')
+    for i in range(len(returnList)):
+        for j in range(len(range[i])):
+            print(f'{list[i][j]:<15}', endswith = "\t")
+
+
+
+
+
+
+main()
+
