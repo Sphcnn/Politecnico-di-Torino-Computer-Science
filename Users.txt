@@ -1,0 +1,5 @@
+John White; pop; rock
+Mike Brown; country; punk
+Karen Black; rock; noise
+Larry Green; beat; folk
+Ingrid Red; country; psychedelic
